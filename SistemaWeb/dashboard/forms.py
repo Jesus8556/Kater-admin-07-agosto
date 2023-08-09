@@ -197,10 +197,15 @@ class DescripcionCotizacionConsultoriaForm(forms.ModelForm):
             'cotizacion': forms.HiddenInput(),
             'codigo': descripcionWidgetConsultoria,
             'descripcion' :forms.HiddenInput(),
+            'descuento_tipo': forms.ChoiceField(widget=forms.RadioSelect,choices=descripcionCotizacion.DESCUENTO_TIPO_CHOICES,),
             'precio_unitario': forms.HiddenInput(),
             'precio_total': forms.HiddenInput(),
+            
             'descuento': forms.Select(attrs={'required': 'required'}),
+            'descuento_manual': forms.DecimalField(max_digits=10, decimal_places=2, required=False),
+
         }
+    
 
 class descripcionWidgetManoDeObra(s2forms.ModelSelect2Widget):
     search_fields = [

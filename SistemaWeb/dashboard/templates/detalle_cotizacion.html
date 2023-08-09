@@ -198,6 +198,8 @@
                 <form method="post" class="detalle-form">
                     {% csrf_token %}
                     {{ form | crispy }}
+                    
+                    
                     <button type="submit" class="btn btn-primary">Guardar Detalles</button>
                     <a href="{% url 'cotizacion' %}" class="btn btn-secondary">Volver</a>
                 </form>
@@ -310,5 +312,28 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function () {
+        var descuentoTipoField = $('[name="descuento_tipo"]');
+        var descuentoField = $('[name="descuento"]').closest('.form-group');
+        var descuentoManualField = $('[name="descuento_manual"]').closest('.form-group');
+
+        function toggleDescuentoFields() {
+            if (descuentoTipoField.val() === 'manual') {
+                descuentoField.hide();
+                descuentoManualField.show();
+            } else {
+                descuentoField.show();
+                descuentoManualField.hide();
+            }
+        }
+
+        toggleDescuentoFields();  // Inicialmente ocultar o mostrar según el valor actual
+        descuentoTipoField.change(toggleDescuentoFields);
+
+        // Resto de tu código JavaScript
+    });
+</script>
+
 
 {% endblock %}
